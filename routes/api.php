@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\{CategoryController};
+use App\Http\Controllers\Api\{
+    CategoryController,
+    CompanyController
+};
 use Illuminate\Support\Facades\Route;
 
-Route::resource('categories', CategoryController::class);
+Route::apiResource('categories', CategoryController::class);
+Route::apiResource('companies', CompanyController::class);
 
 
 Route::get('/', function(){
