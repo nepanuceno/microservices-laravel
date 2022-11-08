@@ -32,10 +32,9 @@ class Company extends Model
         $companies = $this->with('category')
             ->where(function($query) use ($filter){
                 if ($filter != '') {
-                    $query->where('name', 'LIKE', "%%{$filter}");
+                    $query->where('name', 'LIKE', "%{$filter}%");
                     $query->orwhere('email', '=', $filter);
                     $query->orwhere('phone', '=', $filter);
-
                 }
             })
         ->paginate();
