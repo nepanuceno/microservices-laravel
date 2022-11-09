@@ -64,7 +64,7 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $request, $uuid)
     {
-        $company = $this->repository->where('uuid',$uuid)->firstOrFail();
+        $company = $this->repository->where('uuid', $uuid)->firstOrFail();
         $company->update($request->validated());
 
         return response()->json(['messagem'=>'update success']);

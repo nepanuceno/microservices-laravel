@@ -20,7 +20,6 @@ class CategoryTest extends TestCase
     public function test_get_all_categories()
     {
         Category::factory()->count(6)->create();
-
         $response = $this->getJson($this->endpoint);
         $response->assertJsonCount(6, 'data');
         $response->assertStatus(200);
@@ -30,19 +29,13 @@ class CategoryTest extends TestCase
     {
         $response = $this->getJson("{$this->endpoint}/fake-category");
         $response->assertStatus(404);
-
     }
 
     public function test_get_single_category()
     {
         $category = Category::factory()->create();
-
-        // $category->dump();
-        var_dump($category->url);
-
         $response = $this->getJson("{$this->endpoint}/{$category->url}");
         $response->assertStatus(200);
-
     }
 
     public function test_validation_store_category()
@@ -67,14 +60,13 @@ class CategoryTest extends TestCase
 
     public function test_update_notfound_category()
     {
-        $category = Category::factory()->create();
+        Category::factory()->create();
         $data = [
             'title' => "Categoria 01",
             'description' => "Descrição da Categoria"
         ];
 
         $response = $this->putJson("{$this->endpoint}/fake-category", $data);
-
         $response->assertStatus(404);
     }
 
@@ -87,13 +79,12 @@ class CategoryTest extends TestCase
         ];
 
         $response = $this->putJson("{$this->endpoint}/{$category->url}", $data);
-
         $response->assertStatus(200);
     }
 
     public function test_delete_not_found_category()
     {
-        $category = Category::factory()->create();
+        Category::factory()->create();
         $response = $this->deleteJson("{$this->endpoint}/fake-category");
         $response->assertStatus(404);
     }

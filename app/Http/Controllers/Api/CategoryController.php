@@ -66,7 +66,6 @@ class CategoryController extends Controller
     {
         $category = $this->repository->where('url', $url)->firstOrFail();
         $category->update($request->validated());
-
         return response()->json(['message'=>'Update success']);
     }
 
